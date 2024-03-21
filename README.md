@@ -9,4 +9,3 @@ Po dodaniu fikstur można się logować na dane, które służą do połączenia
 - Dodać tłumaczenia
 - Dodać dodatkową walidację danych wiadomości
 - Dodać formatowanie daty dodania wiadomości przy pobieraniu z backendu do tabeli
-- Dodać sortowanie tabeli

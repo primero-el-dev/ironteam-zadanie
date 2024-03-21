@@ -107,13 +107,6 @@ class MessageController extends AbstractController
         $acceptedColumns = ['id', 'emailId', 'sender', 'receiver', 'receivedAt', 'content'];
 
         $qb = $this->messageRepository->createQueryBuilder('m');
-        $orderColumn = null;
-        $orderDir = null;
-
-        if ($queryData['order'][0] ?? null) {
-            $orderColumn = $queryData['order'][0]['column'];
-            $orderDir = $queryData['order'][0]['dir'] === 'asc';
-        }
         
         if ($searched = $queryData['search']['value']) {
             foreach ($queryData['columns'] as $index => $column) {
@@ -124,12 +117,23 @@ class MessageController extends AbstractController
                     continue;
                 }
 
-                if (''.$index == $orderColumn && $column['orderable'] === 'true') {
-                    $qb->addOrderBy('m.' . $column['data'], $orderDir ? 'asc' : 'desc');
-                }
-
                 $qb->orWhere('m.' . $column['data'] . ' LIKE :' . $column['data'])
                     ->setParameter($column['data'], '%'.$searched.'%');
+            }
+        }
+
+        if ($queryData['order'][0] ?? null) {
+            $orderColumn = $queryData['order'][0]['column'];
+            $orderDir = $queryData['order'][0]['dir'] === 'asc';
+
+            foreach ($queryData['columns'] as $index => $column) {
+                if (!in_array($column['data'], $acceptedColumns)) {
+                    continue;
+                }
+
+                if (''.$index == $orderColumn && $column['orderable'] === 'true') {
+                    $qb->addOrderBy('m.' . $column['data'], $orderDir ? 'ASC' : 'DESC');
+                }
             }
         }
 
