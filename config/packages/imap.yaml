@@ -1,0 +1,6 @@
+imap:
+    connections:
+        app_inbox:
+            imap_path: "{imap.iq.pl:993/imap/ssl/novalidate-cert}INBOX"
+            username: '%env(APP_USER_EMAIL)%'
+            password: '%env(APP_USER_PASSWORD)%'

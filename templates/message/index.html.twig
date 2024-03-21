@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MessageController!{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        var messageIndexApiEndpoint = "{{ path('api_message_index') }}"
+        var messageFetchApiEndpoint = "{{ path('api_message_fetch') }}"
+    </script>
+    {{ encore_entry_script_tags('message_index') }}
+{% endblock %}
+
+{% block body %}
+<h1>Messages</h1>
+
+<a href="{{ path('app_message_create') }}" class="btn btn-primary">Create new message</a>
+
+<button id="fetchMessagesButton" class="btn btn-primary">Fetch new messages</button>
+
+<div class="mt-3">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Mail ID</th>
+                <th scope="col">Sender</th>
+                <th scope="col">received at</th>
+                <th scope="col">receiver</th>
+                <th scope="col">Content</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+{% endblock %}

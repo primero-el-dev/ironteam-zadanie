@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit message{% endblock %}
+
+{% block body %}
+    <h1>Edit message</h1>
+
+    {{ form_start(messageForm) }}
+        {{ form_row(messageForm.sender) }}
+        {{ form_row(messageForm.receiver) }}
+        {{ form_row(messageForm.content) }}
+        {{ form_row(messageForm.receivedAt) }}
+
+        <button type="submit" class="btn btn-primary btn-block w-100">Submit</button>
+    {{ form_end(messageForm) }}
+{% endblock %}
